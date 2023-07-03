@@ -66,10 +66,17 @@ void test3()
         int32_t b;
         int8_t a;
     };
-    std::cout << sizeof(A) << std::endl; // 16, 1 + (3) + 4 + 8
-    std::cout << sizeof(B) << std::endl; // 16, 8 + 4 + 1 + (3)
-    std::cout << sizeof(C) << std::endl; // 24, 16 + 1 + 1 + (6)
-    std::cout << sizeof(D) << std::endl; // 13, 8 + 4 + 1
+    struct alignas(std::max_align_t) E {
+        int32_t b;
+        int64_t c;
+        int8_t a;
+    };
+
+    std::cout << alignof(A) << ", " << sizeof(A) << std::endl; //  8, 16 <- 1 + (3) + 4 + 8
+    std::cout << alignof(B) << ", " << sizeof(B) << std::endl; //  8, 16 <- 8 + 4 + 1 + (3)
+    std::cout << alignof(C) << ", " << sizeof(C) << std::endl; //  8, 16 <- 16 + 1 + 1 + (6)
+    std::cout << alignof(D) << ", " << sizeof(D) << std::endl; //  1, 13 <- 8 + 4 + 1
+    std::cout << alignof(E) << ", " << sizeof(E) << std::endl; // 16, 32 <- 4 + (4) + 8 + 1 + (15)
 }
 
 namespace test4 {
