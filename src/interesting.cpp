@@ -66,7 +66,7 @@ void test3()
         int32_t b;
         int8_t a;
     };
-    struct alignas(std::max_align_t) E {
+    struct alignas(max_align_t) E {
         int32_t b;
         int64_t c;
         int8_t a;
@@ -74,7 +74,7 @@ void test3()
 
     std::cout << alignof(A) << ", " << sizeof(A) << std::endl; //  8, 16 <- 1 + (3) + 4 + 8
     std::cout << alignof(B) << ", " << sizeof(B) << std::endl; //  8, 16 <- 8 + 4 + 1 + (3)
-    std::cout << alignof(C) << ", " << sizeof(C) << std::endl; //  8, 16 <- 16 + 1 + 1 + (6)
+    std::cout << alignof(C) << ", " << sizeof(C) << std::endl; //  8, 24 <- 16 + 1 + 1 + (6)
     std::cout << alignof(D) << ", " << sizeof(D) << std::endl; //  1, 13 <- 8 + 4 + 1
     std::cout << alignof(E) << ", " << sizeof(E) << std::endl; // 16, 32 <- 4 + (4) + 8 + 1 + (15)
 }
@@ -284,12 +284,12 @@ int main()
 {
     // test1::test1();
     // test2();
-    // test3();
+    test3();
     // test4::test4();
     // test5();
     // test6::test6();
     // test7();
     // test8::test8();
-    test9();
+    // test9();
     return 0;
 }
